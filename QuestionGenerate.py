@@ -78,7 +78,6 @@ class QuestionManager():
         {usr_msg}<|im_end|>
         <|im_start|>assistant
         """
-        print('TF', TF_template)    
         TF_q = self.__process(sentences, TF_template, request["TF"])
 
 
@@ -92,7 +91,6 @@ class QuestionManager():
         {usr_msg}<|im_end|>
         <|im_start|>assistant
         """
-        print('CH', CH_template)
         CH_q = self.__process(sentences, CH_template, request["Choose"])
 
 
@@ -106,7 +104,6 @@ class QuestionManager():
         {usr_msg}<|im_end|>
         <|im_start|>assistant
         """
-        print('BK', BK_template)
         BK_q = self.__process(sentences, BK_template, request["Blank"])
 
 
@@ -120,7 +117,6 @@ class QuestionManager():
         {usr_msg}<|im_end|>
         <|im_start|>assistant
         """
-        print('QA', QA_template)
         QA_q = self.__process(sentences, QA_template, request["QA"])
         
         
@@ -134,8 +130,6 @@ class QuestionManager():
         # Convert the final structure to a JSON formatted string
         json_output = json.dumps(final_structure, indent=4, ensure_ascii=False)
         json_output = json_output.replace('\\\"', '').replace("\"", '')
-
-        print(json_output)
 
         return json_output
     
@@ -159,3 +153,13 @@ class QuestionManager():
         }
 
         return self.__generate(X, req)
+    
+    def get_json(self, sentences):
+        req = {
+            "TF": 8,
+            "Choose": 9,
+            "Blank": 6,
+            "QA": 4
+        }
+
+        return self.__generate(sentences, req)
